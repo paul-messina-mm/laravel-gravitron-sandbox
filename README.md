@@ -1,10 +1,20 @@
-# Laravel-web-app
+# laravel-gravitron-sandbox
 
-- Este proyecto pretende para verificar como hacer el ci/cd de una webapp 
+# Notice
+Until this point build and test the EC2 Gravitron from ci/cd is in progress
 
-- para correr directo `php artisan serve`
+- [x] check ephemeral EC2 working
+- [x] Installed pre-requisites using cloud-init 
+- [x] check apache working
+- [ ] deploy Laravel code
+- [ ] check test cycle working
 
-- ciclo para ci/cd con Docker
+
+# Workflow
+
+- to run directly for devs `php artisan serve`
+
+- to build and test the docker container directly
 ```
 docker build -t laravel-web-app .
 docker run --rm -d -p 80:80 --hostname testing.com --name laravel-web-app laravel-web-app 
@@ -13,3 +23,10 @@ docker container logs laravel-web-app | grep "code=OK"
 docker container stop laravel-web-app
 docker image rm laravel-web-app
 ```
+
+- to build and test the docker container ci/cd 
+    - `git branch release-contatiner` and push
+
+- to build and test the EC2 Gravitron from ci/cd 
+    - `git branch release-aws` and push 🚧
+
