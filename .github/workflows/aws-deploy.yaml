@@ -30,6 +30,11 @@ jobs:
         #!/bin/bash
         apt-get update && apt-get install -y \
             apache2 \
+            php-cli \
+            php-zip \
+            php-xml \
+            php-mbstring \
+            php-fpm \
             libpng-dev \
             libonig-dev \
             libxml2-dev \
@@ -39,6 +44,14 @@ jobs:
             git \
             libzip-dev \
             && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
+            curl -sS https://getcomposer.org/installer -o composer-setup.php
+            php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+            php -r "unlink('composer-setup.php');"
+            git clone https://github.com/paul-messina-mm/laravel-gravitron-sandbox.git /var/www/html
+            cd /var/www/html ; composer install
+            chown -R www-data.www-data /var/www/html
+            chmod -R 755 /var/www/html
+            chmod -R 777 /var/www/laravel/storage /var/www/laravel/bootstrap/cache
         EOF
         )      
         instance_id=$(aws ec2 run-instances \
