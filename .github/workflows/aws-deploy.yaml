@@ -41,7 +41,7 @@ jobs:
           --key-name ${{ env.KEY_NAME }} \
           --security-group-ids sg-020e10f8dac678684 sg-00d578b7f78a06563 sg-037bca3d9e0f4ae84 sg-070c1eabc5236ed51 \
           --subnet-id subnet-0bbe806b1517c5167 \
-          --associate-public-ip-address \          
+          --associate-public-ip-address \
           --query 'Instances[0].InstanceId' --output text)
         echo "Instance ID: $instance_id"
         echo "::set-output name=INSTANCE_ID::$instance_id"
