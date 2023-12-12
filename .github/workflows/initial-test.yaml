@@ -1,6 +1,9 @@
 name: Build and Test Container
 
-on: [push]
+on:
+  push:
+    branches:
+      - release-contatiner 
 
 jobs:
   build:
