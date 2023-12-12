@@ -11,12 +11,14 @@ Until this point build and test the EC2 Gravitron from ci/cd is in progress
 
 # Error
 ```
-/var/lib/cloud/instance/scripts/part-001: line 22: composer: command not found
+Loading composer repositories with package information
+Updating dependencies
+Deprecation Notice: Using ${var} in strings is deprecated, use {$var} instead in /usr/share/php/Composer/DependencyResolver/Problem.php:366
+Your requirements could not be resolved to an installable set of packages.
 
-and
   Problem 1
-    - symfony/css-selector is locked to version v7.0.0 and an update of this package was not requested.
-    - symfony/css-selector v7.0.0 requires php >=8.2 -> your php version (8.1.2) does not satisfy that requirement.
+    - spatie/laravel-ignition[2.0.0, ..., 2.3.1] require ext-curl * -> it is missing from your system. Install or enable PHP's curl extension.
+    - Root composer.json requires spatie/laravel-ignition ^2.0 -> satisfiable by spatie/laravel-ignition[2.0.0, ..., 2.3.1].
 ```
 
 
