@@ -1,4 +1,4 @@
-name: Launch and SSH into EC2 Instance (copy web-us11)
+name: Launch and check httpd into EC2 Instance (copy web-us11)
 
 on:
   push:
@@ -65,7 +65,7 @@ jobs:
     - name: Check if instace is up
       run: |
         for i in {1..10}; do
-          if curl http://${{ steps.launch-instance.outputs.INSTANCE_IP }}:/?code=OK; then
+          if curl http://${{ steps.get-ip.outputs.INSTANCE_IP }}:/?code=OK; then
             echo "Endpoint is up!"
             exit 0
           else
