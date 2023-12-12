@@ -25,6 +25,22 @@ jobs:
     - name: Launch EC2 instance
       id: launch-instance
       run: |
+        # Define user-data script
+        user_data=$(cat <<'EOF'
+        #!/bin/bash
+        apt-get update && apt-get install -y \
+            apache2 \
+            libpng-dev \
+            libonig-dev \
+            libxml2-dev \
+            zip \
+            curl \
+            unzip \
+            git \
+            libzip-dev \
+            && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
+        EOF
+        )      
         instance_id=$(aws ec2 run-instances \
           --image-id ami-03fd0aa14bd102718 \
           --count 1 \
@@ -33,6 +49,7 @@ jobs:
           --security-group-ids sg-020e10f8dac678684 sg-00d578b7f78a06563 sg-037bca3d9e0f4ae84 sg-070c1eabc5236ed51 \
           --subnet-id subnet-0bbe806b1517c5167 \
           --associate-public-ip-address \
+          --user-data "$user_data" \
           --query 'Instances[0].InstanceId' --output text)
         echo "Instance ID: $instance_id"
         echo "::set-output name=INSTANCE_ID::$instance_id"
