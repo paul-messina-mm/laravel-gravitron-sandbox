@@ -47,16 +47,16 @@ jobs:
             php-xml \
             php-curl \
             composer
-          rm -rf /var/www/html
-          git clone https://github.com/paul-messina-mm/laravel-gravitron-sandbox.git /var/www/html
-          cd /var/www/html
-          rm -f /var/www/html/composer.lock
+          rm -rf /var/www
+          git clone https://github.com/paul-messina-mm/laravel-gravitron-sandbox.git /var/www
+          cd /var/www
+          rm -f /var/www/composer.lock
           ln -s public html
           export COMPOSER_ALLOW_SUPERUSER=1
           composer install
-          chown -R www-data.www-data /var/www/html
-          chmod -R 755 /var/www/html
-          chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache
+          chown -R www-data.www-data /var/www
+          chmod -R 755 /var/www
+          chmod -R 777 /var/www/storage /var/www/bootstrap/cache
         EOF
         )      
         instance_id=$(aws ec2 run-instances \
