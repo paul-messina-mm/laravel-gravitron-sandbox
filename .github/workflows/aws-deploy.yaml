@@ -42,7 +42,9 @@ jobs:
             curl \
             unzip \
             git \
-            libzip-dev
+            libzip-dev \
+            php-xml \
+            composer
           rm -rf /var/www/html
           git clone https://github.com/paul-messina-mm/laravel-gravitron-sandbox.git /var/www/html
           cd /var/www/html ; composer install
@@ -79,6 +81,10 @@ jobs:
         instance_ip=$(aws ec2 describe-instances --instance-ids ${{ steps.launch-instance.outputs.INSTANCE_ID }} --query 'Reservations[0].Instances[0].PublicIpAddress' --output text)
         echo "Instance IP: $instance_ip"
         echo "::set-output name=INSTANCE_IP::$instance_ip"
+
+    - name: wait to cloud-init runs
+      run: |
+        sleep 30
 
     - name: Check if instace is up
       run: |
