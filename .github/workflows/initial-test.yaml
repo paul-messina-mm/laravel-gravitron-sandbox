@@ -1,0 +1,56 @@
+name: Build and Test Container
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v2
+      name: Checkout code
+
+    - name: Setup PHP with PECL extension
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+
+    - name: Install Composer dependencies
+      run: composer install --no-progress --prefer-dist --optimize-autoloader
+
+    - name: Prepare the application
+      run: |
+        php -r "file_exists('.env') || copy('.env.example', '.env');"
+        php artisan key:generate
+
+    - name: Clear Config
+      run: php artisan config:clear
+
+    - name: Test with phpunit
+      run: vendor/bin/phpunit --coverage-text
+
+    - name: Build Docker image
+      run: docker build . -t laravel-web-app
+
+    - name: Run Docker container
+      run: docker run -d -p 80:80 --hostname testing.com --name laravel-container laravel-web-app
+
+    - name: list containers
+      run: docker ps
+
+    - name: Get container logs
+      run: docker logs laravel-container
+
+    - name: Check if container is up
+      run: |
+        for i in {1..10}; do
+          if curl http://localhost:/?code=OK; then
+            echo "Endpoint is up!"
+            exit 0
+          else
+            echo "Waiting for endpoint to be up..."
+            sleep 5
+          fi
+        done
+        echo "Endpoint did not respond in time."
+        exit 1
