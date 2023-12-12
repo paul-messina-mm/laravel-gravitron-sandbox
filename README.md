@@ -11,14 +11,9 @@ Until this point build and test the EC2 Gravitron from ci/cd is in progress
 
 # Error
 ```
-Loading composer repositories with package information
-Updating dependencies
-Deprecation Notice: Using ${var} in strings is deprecated, use {$var} instead in /usr/share/php/Composer/DependencyResolver/Problem.php:366
-Your requirements could not be resolved to an installable set of packages.
-
-  Problem 1
-    - spatie/laravel-ignition[2.0.0, ..., 2.3.1] require ext-curl * -> it is missing from your system. Install or enable PHP's curl extension.
-    - Root composer.json requires spatie/laravel-ignition ^2.0 -> satisfiable by spatie/laravel-ignition[2.0.0, ..., 2.3.1].
+[2023-12-12 17:10:04] production.ERROR: No application encryption key has been specified. {"exception":"[object] (Illuminate\\Encryption\\MissingAppKe
+yException(code: 0): No application encryption key has been specified. at /var/www/vendor/laravel/framework/src/Illuminate/Encryption/EncryptionServic
+eProvider.php:79)
 ```
 
 
