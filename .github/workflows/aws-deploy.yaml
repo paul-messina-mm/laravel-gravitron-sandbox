@@ -48,6 +48,7 @@ jobs:
             composer
           rm -rf /var/www/html
           git clone https://github.com/paul-messina-mm/laravel-gravitron-sandbox.git /var/www/html
+          rm -f /var/www/html/composer.lock
           export COMPOSER_ALLOW_SUPERUSER=1
           cd /var/www/html ; composer install
           chown -R www-data.www-data /var/www/html
