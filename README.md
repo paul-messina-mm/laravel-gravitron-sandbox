@@ -11,17 +11,12 @@ Until this point build and test the EC2 Gravitron from ci/cd is in progress
 
 # Error
 ```
-No VM guests are running outdated hypervisor (qemu) binaries on this host.
-/var/lib/cloud/instance/scripts/part-001: line 17: docker-php-ext-install: command not found
-All settings correct for using Composer
-The HOME or COMPOSER_HOME environment variable must be set for composer to run correctly
-fatal: destination path '/var/www/html' already exists and is not an empty directory.
 /var/lib/cloud/instance/scripts/part-001: line 22: composer: command not found
-chmod: cannot access '/var/www/laravel/storage': No such file or directory
-chmod: cannot access '/var/www/laravel/bootstrap/cache': No such file or directory
-2023-12-12 14:41:00,599 - cc_scripts_user.py[WARNING]: Failed to run module scripts-user (scripts in /var/lib/cloud/instance/scripts)
-2023-12-12 14:41:00,599 - util.py[WARNING]: Running module scripts-user (<module 'cloudinit.config.cc_scripts_user' from '/usr/lib/python3/dist-packages/cloudinit/config/cc_scripts_user.py'>) failed
-Cloud-init v. 23.2.2-0ubuntu0~22.04.1 finished at Tue, 12 Dec 2023 14:41:00 +0000. Datasource DataSourceEc2Local.  Up 73.54 seconds
+
+and
+  Problem 1
+    - symfony/css-selector is locked to version v7.0.0 and an update of this package was not requested.
+    - symfony/css-selector v7.0.0 requires php >=8.2 -> your php version (8.1.2) does not satisfy that requirement.
 ```
 
 
