@@ -107,3 +107,7 @@ jobs:
         done
         echo "Endpoint did not respond in time."
         exit 1
+
+    - name: Terminate EC2 Instance
+      if: always()
+      run: aws ec2 terminate-instances --instance-ids ${{ steps.launch-instance.outputs.INSTANCE_ID }}
